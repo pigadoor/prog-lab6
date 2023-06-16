@@ -1,0 +1,232 @@
+@startuml
+class com.pigadoor.commands.ExitCommand {
+- CollectionManager collectionManager
++ String execute()
+}
+class com.pigadoor.parsers.LocalDateTimeParser {
++ LocalDateTime deserialize(JsonElement,Type,JsonDeserializationContext)
+}
+class com.pigadoor.commands.InsertCommand {
+- CollectionManager collectionManager
++ String execute(Integer,SpaceMarine)
+}
+class com.pigadoor.commands.FilterGreaterThanHealthCommand {
+- CollectionManager collectionManager
++ String execute(int)
+}
+class com.pigadoor.wrappers.SpaceMarineWrapper {
+- int id
+- String name
+- Coordinates coordinates
+- String creationDate
+- float health
+- Long heartCount
+- float height
+- MeleeWeapon meleeWeapon
+- Chapter chapter
++ String toString()
++ Integer getId()
++ String getName()
++ float getHealth()
++ long getHeartCount()
++ float getHeight()
++ MeleeWeapon getMeleeWeapon()
++ Chapter getChapter()
++ void setId(int)
++ void setName(String)
++ void setCoordinates(Coordinates)
++ void setCreationDate(String)
++ void setHealth(float)
++ void setHeartCount(Long)
++ void setHeight(float)
++ void setMeleeWeapon(MeleeWeapon)
++ void setChapter(Chapter)
++ Coordinates getCoordinates()
++ String getCreationDate()
+}
+class com.pigadoor.network.Response {
+- {static} long serialVersionUID
+- String message
++ String getMessage()
++ void setMessage(String)
++ String toString()
++ String parse()
+}
+class com.pigadoor.parsers.CoordinatesParser {
++ Coordinates deserialize(JsonElement,Type,JsonDeserializationContext)
+}
+class com.pigadoor.parsers.SpaceMarinesParser {
++ LinkedList<SpaceMarine> deserialize(JsonElement,Type,JsonDeserializationContext)
+}
+class com.pigadoor.commands.PrintDescendingCommand {
+- CollectionManager collectionManager
++ String execute()
+}
+class com.pigadoor.network.Request {
+- {static} long serialVersionUID
+- String command
+- SpaceMarine spaceMarine
+- Integer key
+- Integer health
+- Float height
+- List<Request> script
++ String getCommand()
++ SpaceMarine getSpaceMarine()
++ Integer getKey()
++ Integer getHealth()
++ Float getHeight()
++ List<Request> getScript()
++ void setCommand(String)
++ void setSpaceMarine(SpaceMarine)
++ void setKey(Integer)
++ void setHealth(Integer)
++ void setHeight(Float)
++ void setScript(List<Request>)
++ String toString()
+}
+class com.pigadoor.commands.CountGreaterThanHeightCommand {
+- CollectionManager collectionManager
++ String execute(float)
+}
+class com.pigadoor.commands.UpdateCommand {
+- CollectionManager collectionManager
++ String execute(Integer,SpaceMarine)
+}
+class com.pigadoor.commands.RemoveGreaterCommand {
+- CollectionManager collectionManager
++ String execute(SpaceMarine)
+}
+class com.pigadoor.data.SpaceMarine {
+- int id
+- String name
+- Coordinates coordinates
+- java.time.LocalDateTime creationDate
+- int health
+- Long heartCount
+- float height
+- MeleeWeapon meleeWeapon
+- Chapter chapter
++ int getId()
++ void setId(int)
++ String getName()
++ void setName(String)
++ Coordinates getCoordinates()
++ void setCoordinates(Coordinates)
++ LocalDateTime getCreationDate()
++ void setCreationDate(LocalDateTime)
++ int getHealth()
++ void setHealth(int)
++ Long getHeartCount()
++ void setHeartCount(Long)
++ float getHeight()
++ void setHeight(float)
++ MeleeWeapon getMeleeWeapon()
++ void setMeleeWeapon(MeleeWeapon)
++ Chapter getChapter()
++ void setChapter(Chapter)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class com.pigadoor.parsers.SpaceMarineParser {
++ SpaceMarine deserialize(JsonElement,Type,JsonDeserializationContext)
+}
+class com.pigadoor.commands.SaveCommand {
+- CollectionManager collectionManager
++ String execute()
+}
+class com.pigadoor.commands.RemoveKeyCommand {
+- CollectionManager collectionManager
++ String execute(Integer)
+}
+class com.pigadoor.application.FileManager {
+- {static} Gson gson
+- {static} List<T> stringToArray(String,Class<T[]>)
+- {static} TreeMap<Integer,SpaceMarine> deserialize(String)
+- {static} boolean validateSpaceMarine(SpaceMarine)
+- {static} String serialize(TreeMap<Integer,SpaceMarine>)
++ {static} void saveCollection(TreeMap<Integer,SpaceMarine>,String)
++ {static} TreeMap<Integer,SpaceMarine> downloadCollection(String)
+}
+class com.pigadoor.application.CommandInvoker {
+- CollectionManager collectionManager
++ void listenForRequests()
++ String serializeToCSV(SpaceMarine)
++ {static} SpaceMarine deserializeFromCSV(String)
+}
+class com.pigadoor.commands.ShowCommand {
+- CollectionManager collectionManager
++ String execute()
+}
+enum com.pigadoor.data.MeleeWeapon {
++  CHAIN_SWORD
++  POWER_SWORD
++  MANREAPER
++  LIGHTING_CLAW
++  POWER_FIST
+}
+class com.pigadoor.commands.ClearCommand {
+- CollectionManager collectionManager
++ String execute()
+}
+class com.pigadoor.commands.RemoveLowerKeyCommand {
+- CollectionManager collectionManager
++ String execute(Integer)
+}
+class com.pigadoor.data.Chapter {
+- String name
+- String parentLegion
++ String getName()
++ void setName(String)
++ String getParentLegion()
++ void setParentLegion(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class com.pigadoor.data.Coordinates {
+- Double x
+- Float y
++ Double getX()
++ void setX(Double)
++ Float getY()
++ void setY(Float)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class com.pigadoor.application.CollectionManager {
+- TreeMap<Integer,SpaceMarine> collection
+- java.time.LocalDate creationDate
+- String filepath
+- {static} CollectionManager INSTANCE
++ {static} CollectionManager getInstance(String)
++ LocalDate getCreationDate()
++ int getMaxId()
++ TreeMap<Integer,SpaceMarine> getCollection()
++ String getFilepath()
+}
+class com.pigadoor.parsers.ChapterParser {
++ Chapter deserialize(JsonElement,Type,JsonDeserializationContext)
+}
+class com.pigadoor.commands.HelpCommand {
+- CollectionManager collectionManager
++ String execute()
+}
+class com.pigadoor.commands.InfoCommand {
+- CollectionManager collectionManager
++ String execute()
+}
+class com.pigadoor.application.Server {
++ {static} void main(String[])
+}
+
+
+com.google.gson.JsonDeserializer <|.. com.pigadoor.parsers.LocalDateTimeParser
+java.io.Serializable <|.. com.pigadoor.network.Response
+com.google.gson.JsonDeserializer <|.. com.pigadoor.parsers.CoordinatesParser
+com.pigadoor.parsers.JsonDeserializer <|.. com.pigadoor.parsers.SpaceMarinesParser
+java.io.Serializable <|.. com.pigadoor.network.Request
+com.google.gson.JsonDeserializer <|.. com.pigadoor.parsers.SpaceMarineParser
+com.pigadoor.parsers.JsonDeserializer <|.. com.pigadoor.parsers.ChapterParser
+@enduml

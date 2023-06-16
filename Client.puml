@@ -1,0 +1,121 @@
+@startuml
+class com.pigadoor.application.InputManager {
++ String receiveName()
++ Double receiveX()
++ Float receiveY()
++ Coordinates receiveCoordinates()
++ int receiveHealth()
++ Long receiveHeartCount()
++ Float receiveHeight()
++ MeleeWeapon receiveMeleeWeapon()
++ String receiveChapterName()
++ String receiveParentLegion()
++ Chapter receiveChapter()
++ SpaceMarine receiveSpaceMarine()
+}
+class com.pigadoor.network.Response {
+- {static} long serialVersionUID
+- String message
++ String getMessage()
++ void setMessage(String)
++ String toString()
+}
+class com.pigadoor.data.Chapter {
+- String name
+- String parentLegion
++ String getName()
++ void setName(String)
++ String getParentLegion()
++ void setParentLegion(String)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class com.pigadoor.network.Request {
+- {static} long serialVersionUID
+- String command
+- SpaceMarine spaceMarine
+- Integer key
+- Integer health
+- Float height
+- List<Request> script
++ String getCommand()
++ SpaceMarine getSpaceMarine()
++ Integer getKey()
++ Integer getHealth()
++ Float getHeight()
++ List<Request> getScript()
++ void setCommand(String)
++ void setSpaceMarine(SpaceMarine)
++ void setKey(Integer)
++ void setHealth(Integer)
++ void setHeight(Float)
++ void setScript(List<Request>)
++ String toString()
+}
+class com.pigadoor.data.Coordinates {
+- Double x
+- Float y
++ Double getX()
++ void setX(Double)
++ Float getY()
++ void setY(Float)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class com.pigadoor.application.ClientConnector {
+- DatagramSocket socket
+- InetAddress address
+- byte[] buffer
++ void run()
++ String serializeToCSV(SpaceMarine)
++ {static} SpaceMarine deserializeFromCSV(String)
+}
+enum com.pigadoor.data.MeleeWeapon {
++  CHAIN_SWORD
++  POWER_SWORD
++  MANREAPER
++  LIGHTING_CLAW
++  POWER_FIST
+}
+class com.pigadoor.data.SpaceMarine {
+- int id
+- String name
+- Coordinates coordinates
+- LocalDateTime creationDate
+- int health
+- Long heartCount
+- float height
+- MeleeWeapon meleeWeapon
+- Chapter chapter
++ int getId()
++ void setId(int)
++ String getName()
++ void setName(String)
++ Coordinates getCoordinates()
++ void setCoordinates(Coordinates)
++ LocalDateTime getCreationDate()
++ void setCreationDate(LocalDateTime)
++ int getHealth()
++ void setHealth(int)
++ Long getHeartCount()
++ void setHeartCount(Long)
++ float getHeight()
++ void setHeight(float)
++ MeleeWeapon getMeleeWeapon()
++ void setMeleeWeapon(MeleeWeapon)
++ Chapter getChapter()
++ void setChapter(Chapter)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+class com.pigadoor.application.Client {
++ {static} void main(String[])
+}
+
+
+java.io.Serializable <|.. com.pigadoor.network.Response
+java.io.Serializable <|.. com.pigadoor.network.Request
+@enduml
